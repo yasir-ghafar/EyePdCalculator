@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "EyePdCalculator"
-include ':app'
+include(":app")
