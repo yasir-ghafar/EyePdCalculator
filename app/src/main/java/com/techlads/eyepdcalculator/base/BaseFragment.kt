@@ -7,14 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.techlads.eyepdcalculator.utils.Constants
-import com.techlads.eyepdcalculator.ui.ResultDialog
-
-
-/**
- * Created by Yasir on 7/20/2022.
- */
-
+import com.techlads.eyepdcalculator.ui.result.ResultDialog
 
 abstract class BaseFragment<B : ViewBinding> : Fragment() {
 
@@ -24,7 +17,7 @@ abstract class BaseFragment<B : ViewBinding> : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = getFragmentBinding(inflater, container)
         return binding.root
     }
@@ -38,20 +31,9 @@ abstract class BaseFragment<B : ViewBinding> : Fragment() {
 
     abstract fun onPostInit()
 
-    fun showResultDialog(
-        result: Float
-    ) {
-        ResultDialog().apply {
-            arguments = Bundle().apply {
-                putString(Constants.PD_RESULT, result.toString())
-            }
-            isCancelable = false
-
-            onCloseClickListener = object : ResultDialog.OnCloseClickListener {
-                override fun onClose(dialogFragment: Dialog?) {
-                    dismiss()
-                }
-            }
+    protected fun showResultDialog(result: Float) {
+        ResultDialog.newInstance(result).apply {
+            onCloseClickListener = ResultDialog.OnCloseClickListener { dismiss() }
         }.show(childFragmentManager, ResultDialog.TAG)
     }
 }

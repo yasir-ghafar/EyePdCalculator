@@ -1,17 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SplashFragment">
+    android:background="@color/canvas"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    tools:context=".ui.splash.SplashFragment">
 
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:id="@+id/splashLogo"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_eye_with_ruler"
-        android:elevation="10dp"
-        android:contentDescription="@string/app_name" />
+    <FrameLayout
+        android:id="@+id/logoBadge"
+        android:layout_width="148dp"
+        android:layout_height="148dp"
+        android:background="@drawable/bg_splash_logo_badge"
+        app:layout_constraintBottom_toTopOf="@id/brandName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/splashLogo"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/splash_brand_name"
+            android:src="@drawable/ic_eye_with_ruler" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/brandName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:letterSpacing="0.02"
+        android:text="@string/splash_brand_name"
+        android:textColor="@color/text_primary"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/brandTagline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logoBadge" />
+
+    <TextView
+        android:id="@+id/brandTagline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/splash_tagline"
+        android:textColor="@color/text_secondary"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/brandName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

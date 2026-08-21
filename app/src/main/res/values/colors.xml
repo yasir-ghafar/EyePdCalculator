@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <!-- Vernier palette — XML bridge until screens move fully to Compose -->
+    <color name="background">#FF0B1014</color>
+    <color name="surface">#FF161B21</color>
+    <color name="surface_variant">#FF1E252D</color>
+    <color name="outline">#FF2A333C</color>
+
+    <color name="mint">#FF66FFD1</color>
+    <color name="mint_dim">#FF4EEABA</color>
+    <color name="on_mint">#FF0B1014</color>
+
+    <color name="amber">#FFF9A825</color>
+    <color name="amber_soft">#FFFFB74D</color>
+
+    <color name="text_primary">#FFFFFFFF</color>
+    <color name="text_secondary">#FFA0AAB4</color>
+    <color name="text_tertiary">#FF6E7A86</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="whiteish">#858282</color>
-    <color name="green">#5BB45F</color>
-    <color name="lightGreen">#5bbd22</color>
-    <color name="darkGreen">#1e6e1a</color>
-    <color name="lightGreenActive">#77d242</color>
-    <color name="goldenYellow">#F9D423</color>
-    <color name="goldenYellowActive">#ffe749</color>
+
+    <!-- Legacy aliases used by remaining XML drawables/layouts -->
+    <color name="canvas">@color/background</color>
+    <color name="brand_primary">@color/mint</color>
+    <color name="brand_container">@color/surface_variant</color>
+    <color name="accent_gold">@color/amber</color>
+    <color name="text_on_brand">@color/on_mint</color>
+    <color name="green">@color/mint</color>
+    <color name="lightGreen">@color/mint</color>
+    <color name="lightGreenActive">@color/mint_dim</color>
+    <color name="darkGreen">@color/on_mint</color>
+    <color name="goldenYellow">@color/amber</color>
+    <color name="goldenYellowActive">@color/amber_soft</color>
+    <color name="whiteish">@color/text_secondary</color>
 </resources>

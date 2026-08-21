@@ -1,10 +1,10 @@
-package com.techlads.eyepdcalculator.ui
+package com.techlads.eyepdcalculator.ui.onboarding
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.techlads.eyepdcalculator.utils.Constants.CURRENT_SLIDE_TEXT
 import com.techlads.eyepdcalculator.base.BaseFragment
 import com.techlads.eyepdcalculator.databinding.FragmentCurrentOnBoardingBinding
+import com.techlads.eyepdcalculator.utils.Constants.CURRENT_SLIDE_TEXT
 
 class CurrentOnBoardingFragment : BaseFragment<FragmentCurrentOnBoardingBinding>() {
 
@@ -16,10 +16,6 @@ class CurrentOnBoardingFragment : BaseFragment<FragmentCurrentOnBoardingBinding>
     }
 
     override fun onPostInit() {
-        val text = arguments?.getString(CURRENT_SLIDE_TEXT)
-
-        text.let {
-            binding.guideLineText.text = it
-        }
+        binding.guideLineText.text = arguments?.getString(CURRENT_SLIDE_TEXT).orEmpty()
     }
 }
