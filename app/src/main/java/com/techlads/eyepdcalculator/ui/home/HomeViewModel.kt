@@ -20,12 +20,10 @@ class HomeViewModel : ViewModel() {
     private val _events = MutableSharedFlow<HomeEvent>(extraBufferCapacity = 1)
     val events: SharedFlow<HomeEvent> = _events.asSharedFlow()
 
-    private var pendingCaptureUri: Uri? = null
-
     fun onCaptureClicked(hasCameraPermission: Boolean, shouldShowRationale: Boolean) {
         viewModelScope.launch {
             when {
-                hasCameraPermission -> _events.emit(HomeEvent.PrepareCameraCapture)
+                hasCameraPermission -> Unit
                 shouldShowRationale -> _events.emit(HomeEvent.ShowPermissionRationale)
                 else -> _events.emit(HomeEvent.RequestCameraPermission)
             }
@@ -34,25 +32,21 @@ class HomeViewModel : ViewModel() {
 
     fun onPermissionResult(isGranted: Boolean) {
         viewModelScope.launch {
-            if (isGranted) {
-                _events.emit(HomeEvent.PrepareCameraCapture)
+            if (!isGranted) {
+                _events.emit(HomeEvent.ShowPermissionRationale)
             }
         }
     }
 
-    fun onTempImageUriReady(uri: Uri) {
-        pendingCaptureUri = uri
-        viewModelScope.launch {
-            _events.emit(HomeEvent.LaunchCamera(uri))
+    fun onImageCaptured(uri: Uri) {
+        _uiState.update {
+            it.copy(capturedImageUri = uri, hasCapturedImage = true)
         }
     }
 
-    fun onImageCaptureResult(isSuccess: Boolean) {
-        val uri = pendingCaptureUri ?: return
-        if (isSuccess) {
-            _uiState.update {
-                it.copy(capturedImageUri = uri, hasCapturedImage = true)
-            }
+    fun onRetake() {
+        _uiState.update {
+            it.copy(capturedImageUri = null, hasCapturedImage = false)
         }
     }
 

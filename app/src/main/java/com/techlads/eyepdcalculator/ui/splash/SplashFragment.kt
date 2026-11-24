@@ -24,6 +24,14 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     }
 
     override fun onPostInit() {
+        binding.logoBadge.alpha = 0f
+        binding.logoBadge.scaleX = 0.84f
+        binding.logoBadge.scaleY = 0.84f
+        binding.brandName.alpha = 0f
+        binding.brandTagline.alpha = 0f
+        binding.logoBadge.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(700).start()
+        binding.brandName.animate().alpha(1f).setStartDelay(180).setDuration(420).start()
+        binding.brandTagline.animate().alpha(1f).setStartDelay(320).setDuration(420).start()
         observeEvents()
     }
 

@@ -1,28 +1,22 @@
 package com.techlads.eyepdcalculator.ui.onboarding
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager2.widget.ViewPager2
 import com.techlads.eyepdcalculator.R
 import com.techlads.eyepdcalculator.base.BaseFragment
 import com.techlads.eyepdcalculator.databinding.FragmentOnBoardingSliderBinding
+import com.techlads.eyepdcalculator.ui.theme.VernierTheme
 import kotlinx.coroutines.launch
 
 class OnBoardingSliderFragment : BaseFragment<FragmentOnBoardingSliderBinding>() {
 
     private val viewModel: OnBoardingViewModel by viewModels()
-
-    private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
-        override fun onPageSelected(position: Int) {
-            viewModel.onPageSelected(position)
-        }
-    }
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -32,24 +26,15 @@ class OnBoardingSliderFragment : BaseFragment<FragmentOnBoardingSliderBinding>()
     }
 
     override fun onPostInit() {
-        binding.viewPager.adapter = SliderAdapter(requireActivity())
-        binding.indicator.setViewPager(binding.viewPager)
-        binding.viewPager.registerOnPageChangeCallback(pageChangeCallback)
-        binding.btnNext.setOnClickListener { viewModel.onNextClicked() }
-
-        observeState()
-        observeEvents()
-    }
-
-    private fun observeState() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collect { state ->
-                    binding.btnNext.visibility =
-                        if (state.isNextVisible) View.VISIBLE else View.INVISIBLE
-                }
+        binding.onboardingCompose.setViewCompositionStrategy(
+            ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
+        )
+        binding.onboardingCompose.setContent {
+            VernierTheme {
+                OnboardingScreen(onFinished = viewModel::onFinished)
             }
         }
+        observeEvents()
     }
 
     private fun observeEvents() {
@@ -66,10 +51,5 @@ class OnBoardingSliderFragment : BaseFragment<FragmentOnBoardingSliderBinding>()
                 }
             }
         }
-    }
-
-    override fun onDestroyView() {
-        binding.viewPager.unregisterOnPageChangeCallback(pageChangeCallback)
-        super.onDestroyView()
     }
 }

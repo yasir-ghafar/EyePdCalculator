@@ -8,6 +8,8 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.ViewGroup
+import java.util.Locale
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import com.techlads.eyepdcalculator.R
@@ -21,7 +23,9 @@ class ResultDialog : DialogFragment() {
 
         fun newInstance(result: Float): ResultDialog {
             return ResultDialog().apply {
-                arguments = bundleOf(Constants.PD_RESULT to result.toString())
+                arguments = bundleOf(
+                    Constants.PD_RESULT to String.format(Locale.US, "%.1f", result)
+                )
                 isCancelable = false
             }
         }
@@ -47,9 +51,16 @@ class ResultDialog : DialogFragment() {
             }
     }
 
+    override fun onStart() {
+        super.onStart()
+        val width = (resources.displayMetrics.widthPixels * 0.88f).toInt()
+        dialog?.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
+    }
+
     private fun bindResult() {
         val result = arguments?.getString(Constants.PD_RESULT).orEmpty()
-        binding.resultTv.text = getString(R.string.pd_result_message, result)
+        binding.resultValue.text = result
+        binding.resultTv.text = getString(R.string.result_caption)
     }
 
     fun interface OnCloseClickListener {

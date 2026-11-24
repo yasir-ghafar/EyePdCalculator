@@ -8,14 +8,20 @@ import java.io.File
 object ImageCaptureHelper {
 
     fun createTempImageUri(context: Context): Uri {
-        val tmpFile = File.createTempFile("tmp_image_file", ".png", context.cacheDir).apply {
-            createNewFile()
+        return uriFor(context, createTempImageFile(context))
+    }
+
+    fun createTempImageFile(context: Context): File {
+        return File.createTempFile("tmp_image_file", ".jpg", context.cacheDir).apply {
             deleteOnExit()
         }
+    }
+
+    fun uriFor(context: Context, file: File): Uri {
         return FileProvider.getUriForFile(
             context,
             "${context.packageName}.provider",
-            tmpFile
+            file
         )
     }
 }

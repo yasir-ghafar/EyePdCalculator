@@ -63,6 +63,10 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
 
     implementation(libs.circleindicator)
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
 
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
