@@ -3,9 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="click_picture">Click Picture</string>
-    <string name="app_name_splash">Pupillary Distance Calculator</string>
     <string name="splash_brand_name">PD Measure</string>
-    <string name="splash_tagline">Pupillary distance in under a minute</string>
     <string name="result_dialog_title">Result</string>
     <string name="close">Close</string>
 
