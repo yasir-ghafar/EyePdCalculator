@@ -3,25 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@+id/splashFragment">
-
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.techlads.eyepdcalculator.ui.splash.SplashFragment"
-        android:label="Splash Fragment"
-        tools:layout="@layout/fragment_splash">
-
-        <action
-            android:id="@+id/action_splashFragment_to_onBoardingFragment"
-            app:destination="@+id/OnBoardingFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true" />
-
-    </fragment>
+    app:startDestination="@+id/OnBoardingFragment">
 
     <fragment
         android:id="@+id/OnBoardingFragment"
